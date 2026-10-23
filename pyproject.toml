@@ -56,6 +56,7 @@ warn_return_any = true
 warn_unused_configs = false
 disallow_untyped_defs = true
 mypy_path = "src"
+exclude = ["cdk\\.out"]
 
 [[tool.mypy.overrides]]
 module = ["aws_cdk.*", "constructs.*", "mangum.*", "boto3.*", "botocore.*", "workflow_adapter.*"]
