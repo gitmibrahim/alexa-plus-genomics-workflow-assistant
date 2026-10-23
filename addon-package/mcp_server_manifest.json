@@ -1,0 +1,32 @@
+{
+  "manifestVersion": "1.0",
+  "name": "checkpoint-genomics-wgs-qc",
+  "displayName": "Checkpoint — Clinical Genomics WGS Wet-Lab QC Assistant",
+  "description": "Hands-free Whole Genome Sequencing (WGS) pre-sequencing quality control and DRAGEN/Emedgene bioinformatics pipeline release assistant.",
+  "transport": {
+    "type": "streamable-http",
+    "endpointPath": "/mcp",
+    "protectedResourceMetadataPath": "/.well-known/oauth-protected-resource"
+  },
+  "authentication": {
+    "type": "oauth2.1",
+    "pkceRequired": true,
+    "codeChallengeMethod": "S256",
+    "serviceTier": {
+      "grantType": "client_credentials",
+      "scopes": ["mcp:service"]
+    },
+    "userTier": {
+      "grantType": "authorization_code",
+      "scopes": ["mcp:tools"]
+    }
+  },
+  "tools": [
+    "start_inspection",
+    "get_inspection_status",
+    "record_inspection_result",
+    "resolve_inspection_exception",
+    "complete_inspection",
+    "configure_notifications"
+  ]
+}

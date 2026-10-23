@@ -1,0 +1,62 @@
+[build-system]
+requires = ["hatchling>=1.21.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "alexa-plus-genomics-workflow-assistant"
+version = "0.1.0"
+description = "Hands-free Whole Genome Sequencing (WGS) wet-lab QC and DRAGEN/Emedgene pipeline release assistant for Alexa+ powered by mcp-workflow-adapter."
+readme = "README.md"
+license = { text = "Apache-2.0" }
+requires-python = ">=3.11"
+authors = [{ name = "Checkpoint Contributors" }]
+dependencies = [
+    "mcp-workflow-adapter[aws]",
+    "mangum>=0.17.0,<1.0.0",
+]
+
+[project.optional-dependencies]
+cdk = [
+    "aws-cdk-lib>=2.130.0,<3.0.0",
+    "constructs>=10.3.0,<11.0.0",
+]
+dev = [
+    "aws-cdk-lib>=2.130.0,<3.0.0",
+    "constructs>=10.3.0,<11.0.0",
+    "pytest>=8.0.0,<9.0.0",
+    "pytest-asyncio>=0.23.0,<1.0.0",
+    "ruff>=0.3.0,<1.0.0",
+    "mypy>=1.8.0,<2.0.0",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/genomics_assistant"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+addopts = "-ra -q"
+markers = [
+    "aws: live AWS integration tests requiring deployed CDK stack and valid AWS credentials",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+src = ["src", "tests", "scripts", "infra"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "N", "BLE", "C4", "RET", "SIM"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+mypy_path = "src"
+
+[[tool.mypy.overrides]]
+module = ["aws_cdk.*", "constructs.*", "mangum.*", "boto3.*", "botocore.*"]
+ignore_missing_imports = true
