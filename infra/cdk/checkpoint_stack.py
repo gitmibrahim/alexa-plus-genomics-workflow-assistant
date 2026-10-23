@@ -208,7 +208,7 @@ class CheckpointGenomicsStack(Stack):
             state_machine_name=sfn_name,
             definition_body=sfn.DefinitionBody.from_string(json.dumps(asl_definition)),
             state_machine_type=sfn.StateMachineType.STANDARD,
-            role=sfn_role,
+            role=cast(iam.IRole, sfn_role),
             timeout=Duration.hours(2),
         )
 
