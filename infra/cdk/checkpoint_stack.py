@@ -270,7 +270,7 @@ class CheckpointGenomicsStack(Stack):
             api_name=f"CheckpointMcpHttpApi-{stage_name}",
         )
         mcp_integration = apigw_integrations.HttpLambdaIntegration(
-            "McpLambdaIntegration", handler=mcp_server_fn
+            "McpLambdaIntegration", handler=cast(lambda_.IFunction, mcp_server_fn)
         )
         http_api.add_routes(
             path="/mcp",
