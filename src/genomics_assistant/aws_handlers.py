@@ -4,7 +4,7 @@ import logging
 import os
 from typing import Any
 
-import boto3  # type: ignore[import-untyped]
+import boto3
 from workflow_adapter.backends.aws_dynamodb import DynamoDBWorkflowStore
 from workflow_adapter.backends.aws_sfn_reconciler import StepFunctionsReconciler, _now_ms
 from workflow_adapter.models import TokenLifecycleStatus

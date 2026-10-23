@@ -17,7 +17,7 @@ for p in (REPO_ROOT / "src", ADAPTER_ROOT / "src", ADAPTER_ROOT):
     if str(p) not in sys.path:
         sys.path.insert(0, str(p))
 
-from tests.fixtures.oauth_test_issuer import EphemeralOAuth2TestIssuer  # noqa: E402
+from tests.fixtures.oauth_test_issuer import EphemeralOAuth2TestIssuer  # type: ignore[import-not-found]  # noqa: E402
 from workflow_adapter.auth import AuthProfile, OAuth2TokenVerifier  # noqa: E402
 from workflow_adapter.backends.local import LocalBackend  # noqa: E402
 from workflow_adapter.mcp_server import MCPWorkflowServer  # noqa: E402

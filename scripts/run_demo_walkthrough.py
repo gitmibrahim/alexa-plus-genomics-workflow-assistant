@@ -6,7 +6,7 @@ import json
 import sys
 import tempfile
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 import httpx
 
@@ -17,7 +17,7 @@ for p in (REPO_ROOT / "src", ADAPTER_ROOT / "src", ADAPTER_ROOT):
     if str(p) not in sys.path:
         sys.path.insert(0, str(p))
 
-from tests.fixtures.oauth_test_issuer import EphemeralOAuth2TestIssuer  # noqa: E402
+from tests.fixtures.oauth_test_issuer import EphemeralOAuth2TestIssuer  # type: ignore[import-not-found]  # noqa: E402
 from workflow_adapter.auth import AuthProfile, OAuth2TokenVerifier  # noqa: E402
 from workflow_adapter.backends.local import InMemoryNotificationSink, LocalBackend  # noqa: E402
 from workflow_adapter.mcp_server import MCPWorkflowServer  # noqa: E402
@@ -57,7 +57,7 @@ async def _rpc_call(
     )
     assert resp.status_code == 200, f"Expected HTTP 200, got {resp.status_code}: {resp.text}"
     body: dict[str, Any] = resp.json()
-    return body["result"]
+    return cast("dict[str, Any]", body["result"])
 
 
 async def _tool_call(

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import json
-from typing import Any
+from typing import Any, cast
 
 import aws_cdk as cdk
 from aws_cdk import (
@@ -131,7 +131,7 @@ class CheckpointGenomicsStack(Stack):
         sfn_role = iam.Role(
             self,
             "StateMachineExecutionRole",
-            assumed_by=iam.ServicePrincipal("states.amazonaws.com"),
+            assumed_by=cast(iam.IPrincipal, iam.ServicePrincipal("states.amazonaws.com")),
         )
         ack_and_route_fn.grant_invoke(sfn_role)
         register_wait_token_fn.grant_invoke(sfn_role)

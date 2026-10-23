@@ -53,10 +53,10 @@ ignore = ["E501"]
 python_version = "3.11"
 strict = true
 warn_return_any = true
-warn_unused_configs = true
+warn_unused_configs = false
 disallow_untyped_defs = true
 mypy_path = "src"
 
 [[tool.mypy.overrides]]
-module = ["aws_cdk.*", "constructs.*", "mangum.*", "boto3.*", "botocore.*"]
+module = ["aws_cdk.*", "constructs.*", "mangum.*", "boto3.*", "botocore.*", "workflow_adapter.*"]
 ignore_missing_imports = true
